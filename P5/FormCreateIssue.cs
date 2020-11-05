@@ -53,14 +53,51 @@ namespace Builder
 
         private void CreateIssueButton_Click(object sender, EventArgs e)
         {
-            Issue newIssue = new Issue();
-
             if (string.IsNullOrWhiteSpace(TitleBox.Text))
             {
                 MessageBox.Show("No issue title provided", "Attention", MessageBoxButtons.OK);
-
+                return;
             }
 
+            if (string.IsNullOrWhiteSpace(DiscovererBox.Text))
+            {
+                MessageBox.Show("No issue discoverer provided", "Attention", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(ComponentBox.Text))
+            {
+                MessageBox.Show("No issue component provided", "Attention", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(StatusBox.Text))
+            {
+                MessageBox.Show("No issue status provided", "Attention", MessageBoxButtons.OK);
+                return;
+            }
+
+            Issue newIssue = new Issue();
+
+            newIssue.ID = Int32.Parse(IssueIDBox.Text);
+            newIssue.title = TitleBox.Text;
+            newIssue.projectId = selectedProject;
+            newIssue.discoveryDate = dateTimePicker.Value;
+            newIssue.discoverer = DiscovererBox.Text;
+            newIssue.initialDescription = DescriptionBox.Text;
+            newIssue.component = ComponentBox.Text;
+
+            FakeIssueStatusRepository formStatusRepo = new FakeIssueStatusRepository();
+            foreach (IssueStatus s in formStatusRepo.GetAll())
+            {
+                if (s.Value == StatusBox.Text)
+                {
+                    newIssue.status = s.Id;
+                }
+            }
+
+            formIssueRepo.Add(newIssue);
+            Dispose();
         }
     }
 }
