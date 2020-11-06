@@ -90,6 +90,7 @@ namespace Builder
                 return;
             }
 
+
             modifyIssue.ID = Int32.Parse(IssueIdBox.Text);
             modifyIssue.title = IssueTitleBox.Text;
             modifyIssue.projectId = selectedProject;
@@ -108,6 +109,15 @@ namespace Builder
             }
 
             FakeIssueRepository issueRepo = new FakeIssueRepository();
+
+            foreach (Issue i in issueRepo.GetAll(selectedProject))
+            {
+                if (i.title == modifyIssue.title)
+                {
+                    MessageBox.Show("Duplicate issue names not allowed", "Attention", MessageBoxButtons.OK);
+                    return;
+                }
+            }
 
             issueRepo.Modify(modifyIssue);
             Dispose();

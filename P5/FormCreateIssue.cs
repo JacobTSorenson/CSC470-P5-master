@@ -96,6 +96,15 @@ namespace Builder
                 }
             }
 
+            foreach (Issue i in formIssueRepo.GetAll(selectedProject))
+            {
+                if (i.title == newIssue.title)
+                {
+                    MessageBox.Show("Duplicate issue names not allowed", "Attention", MessageBoxButtons.OK);
+                    return;
+                }
+            }
+
             formIssueRepo.Add(newIssue);
             Dispose();
         }

@@ -15,11 +15,13 @@ namespace Builder
     {
         public FakeIssueRepository formIssueRepo;
         public int selectedProject;
-        public FormSelectIssue(FakeIssueRepository issueRepo, int projectId)
+        public int operationType;
+        public FormSelectIssue(FakeIssueRepository issueRepo, int projectId, int type)
         {
             InitializeComponent();
             formIssueRepo = issueRepo;
             selectedProject = projectId;
+            operationType = type;
         }
 
         private void FormSelectIssue_Load(object sender, EventArgs e)
@@ -95,9 +97,27 @@ namespace Builder
                 }
             }
 
-            FormModifyIssue modifyForm = new FormModifyIssue(modifyIssue, selectedProject);
-            modifyForm.ShowDialog();
-            modifyForm.Dispose();
+            if (operationType == 0)
+            {
+                DialogResult = DialogResult.OK;
+                FormModifyIssue modifyForm = new FormModifyIssue(modifyIssue, selectedProject);
+                modifyForm.ShowDialog();
+                modifyForm.Dispose();
+            }
+
+            else if (operationType == 1)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to remove: " + modifyIssue.title + "?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    formIssueRepo.Remove(modifyIssue);
+                }
+                else
+                {
+                    MessageBox.Show("Remove canceled", "Attention", MessageBoxButtons.OK);
+                    Dispose();
+                }
+            }
             Dispose();
         }
     }

@@ -108,7 +108,14 @@ namespace P5
 
         private void issuesModifyToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            FormSelectIssue form = new FormSelectIssue(issueRepository, projectSelection);
+            FormSelectIssue form = new FormSelectIssue(issueRepository, projectSelection, 0);
+            form.ShowDialog();
+            form.Dispose();
+        }
+
+        private void issuesRemoveToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            FormSelectIssue form = new FormSelectIssue(issueRepository, projectSelection, 1);
             form.ShowDialog();
             form.Dispose();
         }
