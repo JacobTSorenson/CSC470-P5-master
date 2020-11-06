@@ -30,13 +30,13 @@
         {
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.descriptionBox = new System.Windows.Forms.RichTextBox();
+            this.statusBox = new System.Windows.Forms.ComboBox();
+            this.componentBox = new System.Windows.Forms.TextBox();
+            this.discovererBox = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.IssueTitleBox = new System.Windows.Forms.TextBox();
+            this.IssueIdBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,6 +54,7 @@
             this.button2.TabIndex = 31;
             this.button2.Text = "Modify Issue";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -63,60 +64,60 @@
             this.button1.TabIndex = 30;
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // richTextBox1
+            // descriptionBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(101, 207);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(400, 262);
-            this.richTextBox1.TabIndex = 29;
-            this.richTextBox1.Text = "";
+            this.descriptionBox.Location = new System.Drawing.Point(101, 207);
+            this.descriptionBox.Name = "descriptionBox";
+            this.descriptionBox.Size = new System.Drawing.Size(400, 262);
+            this.descriptionBox.TabIndex = 29;
+            this.descriptionBox.Text = "";
             // 
-            // comboBox2
+            // statusBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(101, 162);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(400, 21);
-            this.comboBox2.TabIndex = 28;
+            this.statusBox.FormattingEnabled = true;
+            this.statusBox.Location = new System.Drawing.Point(101, 162);
+            this.statusBox.Name = "statusBox";
+            this.statusBox.Size = new System.Drawing.Size(400, 21);
+            this.statusBox.TabIndex = 28;
             // 
-            // textBox3
+            // componentBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(101, 136);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(400, 20);
-            this.textBox3.TabIndex = 27;
+            this.componentBox.Location = new System.Drawing.Point(101, 136);
+            this.componentBox.Name = "componentBox";
+            this.componentBox.Size = new System.Drawing.Size(400, 20);
+            this.componentBox.TabIndex = 27;
             // 
-            // comboBox1
+            // discovererBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(101, 110);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(400, 21);
-            this.comboBox1.TabIndex = 26;
+            this.discovererBox.FormattingEnabled = true;
+            this.discovererBox.Location = new System.Drawing.Point(101, 110);
+            this.discovererBox.Name = "discovererBox";
+            this.discovererBox.Size = new System.Drawing.Size(400, 21);
+            this.discovererBox.TabIndex = 26;
             // 
-            // dateTimePicker1
+            // dateTimePicker
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(101, 84);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(400, 20);
-            this.dateTimePicker1.TabIndex = 25;
+            this.dateTimePicker.Location = new System.Drawing.Point(101, 84);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(400, 20);
+            this.dateTimePicker.TabIndex = 25;
             // 
-            // textBox2
+            // IssueTitleBox
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(101, 58);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(400, 20);
-            this.textBox2.TabIndex = 24;
+            this.IssueTitleBox.Location = new System.Drawing.Point(101, 58);
+            this.IssueTitleBox.Name = "IssueTitleBox";
+            this.IssueTitleBox.Size = new System.Drawing.Size(400, 20);
+            this.IssueTitleBox.TabIndex = 24;
             // 
-            // textBox1
+            // IssueIdBox
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(101, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(63, 20);
-            this.textBox1.TabIndex = 23;
+            this.IssueIdBox.Enabled = false;
+            this.IssueIdBox.Location = new System.Drawing.Point(101, 32);
+            this.IssueIdBox.Name = "IssueIdBox";
+            this.IssueIdBox.Size = new System.Drawing.Size(63, 20);
+            this.IssueIdBox.TabIndex = 23;
             // 
             // label7
             // 
@@ -188,13 +189,13 @@
             this.ClientSize = new System.Drawing.Size(557, 566);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.descriptionBox);
+            this.Controls.Add(this.statusBox);
+            this.Controls.Add(this.componentBox);
+            this.Controls.Add(this.discovererBox);
+            this.Controls.Add(this.dateTimePicker);
+            this.Controls.Add(this.IssueTitleBox);
+            this.Controls.Add(this.IssueIdBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -204,6 +205,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormModifyIssue";
             this.Text = "Modify Issue";
+            this.Load += new System.EventHandler(this.FormModifyIssue_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,13 +215,13 @@
 
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RichTextBox descriptionBox;
+        private System.Windows.Forms.ComboBox statusBox;
+        private System.Windows.Forms.TextBox componentBox;
+        private System.Windows.Forms.ComboBox discovererBox;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.TextBox IssueTitleBox;
+        private System.Windows.Forms.TextBox IssueIdBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;

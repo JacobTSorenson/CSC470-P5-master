@@ -7,6 +7,7 @@ namespace P5
     {
         private AppUser _CurrentAppUser = new AppUser();
         private int projectSelection;
+        private FakeIssueRepository issueRepository = new FakeIssueRepository();
         public FormMain()
         {
             InitializeComponent();
@@ -91,8 +92,7 @@ namespace P5
 
         private void issuesDashboardToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            FakeIssueRepository issueRepository = new FakeIssueRepository();
-            int issues = issueRepository.GetNextId() - 1;
+            int issues = issueRepository.GetTotalNumberOfIssues(projectSelection);
             FormIssueDashboard form = new FormIssueDashboard(issues, issueRepository, projectSelection);
             form.ShowDialog();
             form.Dispose();
@@ -100,9 +100,15 @@ namespace P5
 
         private void issuesRecordToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            FakeIssueRepository issueRepository = new FakeIssueRepository();
             int issues = issueRepository.GetNextId();
             FormCreateIssue form = new FormCreateIssue(issues, issueRepository, projectSelection);
+            form.ShowDialog();
+            form.Dispose();
+        }
+
+        private void issuesModifyToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            FormSelectIssue form = new FormSelectIssue(issueRepository, projectSelection);
             form.ShowDialog();
             form.Dispose();
         }
