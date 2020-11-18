@@ -108,10 +108,10 @@ namespace Builder
             else if (operationType == 1)
             {
                 DialogResult result = MessageBox.Show("Are you sure you want to remove: " + modifyIssue.title + "?", "Confirmation", MessageBoxButtons.YesNo);
+                
                 if (result == DialogResult.Yes)
-                {
                     formIssueRepo.Remove(modifyIssue);
-                }
+
                 else
                 {
                     MessageBox.Show("Remove canceled", "Attention", MessageBoxButtons.OK);

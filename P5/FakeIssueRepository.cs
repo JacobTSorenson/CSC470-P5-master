@@ -63,26 +63,23 @@ namespace P5
         public List<Issue> GetAll(int projectId)
         {
             List<Issue> returnList = new List<Issue>();
+
             foreach (Issue i in issues)
             {
                 if (i.projectId == projectId)
-                {
                     returnList.Add(i);
-                }
             }
+
             return returnList;
         }
         public string Add(Issue issue)
         {
-            string newIssueTitle = issue.title.Trim();
-            if (IsDuplicateTitle(newIssueTitle))
-            {
+            if (IsDuplicateTitle(issue.title.Trim()))
                 return DUPLICATE_ISSUE_TITLE_ERROR;
-            }
-            if (newIssueTitle == "")
-            {
+
+            if (issue.title.Trim() == "")
                 return EMPTY_ISSUE_TITLE_ERROR;
-            }
+
             issue.ID = GetNextId();
             issues.Add(issue);
             return NO_ERROR;
@@ -97,6 +94,7 @@ namespace P5
                     return true;
                 }
             }
+
             return false;
         }
         
@@ -111,18 +109,19 @@ namespace P5
                     return NO_ERROR;
                 }
             }
+
             return NO_ISSUE_FOUND_ERROR;
         }
         public int GetTotalNumberOfIssues(int projectId)
         {
             int counter = 0;
+
             foreach (Issue i in issues)
             {
                 if (i.projectId == projectId)
-                {
                     counter++;
-                }
             }
+
             return counter;
         }
         public List<string> GetIssuesByMonth(int projectId)
@@ -134,14 +133,12 @@ namespace P5
             foreach (Issue i in GetAll(projectId))
             {
                 DateTime monthCutoff = new DateTime(i.discoveryDate.Year, i.discoveryDate.Month, 1, 1, 1, 1);
+
                 if (!uniqueDates.TryGetValue(monthCutoff.Ticks, out dateIssueCount))
-                {
                     uniqueDates.Add(monthCutoff.Ticks, 1);
-                }
+
                 else
-                {
                     uniqueDates[monthCutoff.Ticks]++;
-                }
             }
 
             foreach (KeyValuePair<long, int> pair in uniqueDates)
@@ -150,6 +147,7 @@ namespace P5
                 string itemName = surrogate.Year + " - " + surrogate.Month + ": " + pair.Value;
                 issuesByMonth.Add(itemName);
             }
+
             return issuesByMonth;
         }
         public List<string> GetIssuesByDiscoverer(int projectId)
@@ -161,13 +159,10 @@ namespace P5
             foreach (Issue i in GetAll(projectId))
             {
                 if (!uniqueDiscoverers.TryGetValue(i.discoverer, out discIssueCount))
-                {
                     uniqueDiscoverers.Add(i.discoverer, 1);
-                }
+
                 else
-                {
                     uniqueDiscoverers[i.discoverer]++;
-                }
             }
 
             foreach (KeyValuePair<string, int> pair in uniqueDiscoverers)
@@ -176,6 +171,7 @@ namespace P5
                 string itemName = nameArray[1] + ", " + nameArray[0] + " - " + pair.Value;
                 issuesByDiscoverer.Add(itemName);
             }
+
             return issuesByDiscoverer;
         }
         public Issue GetIssueById(int id)
@@ -185,29 +181,32 @@ namespace P5
                 if (i.ID == id)
                     return i;
             }
+
             return null;
         }
         
         public int GetNextId()
         {
             int currentMaxId = 0;
+
             foreach (Issue i in issues)
             {
                 if (currentMaxId < i.ID)
                     currentMaxId = i.ID;
             }
+
             return ++currentMaxId;
         }
         public bool IsDuplicateTitle(string issueName)
         {
             bool isDuplicate = false;
+
             foreach (Issue i in issues)
             {
                 if (issueName == i.title)
-                {
                     isDuplicate = true;
-                }
             }
+
             return isDuplicate;
         }
     }

@@ -8,6 +8,8 @@ namespace P5
         private AppUser _CurrentAppUser = new AppUser();
         private int projectSelection;
         private FakeIssueRepository issueRepository = new FakeIssueRepository();
+        private FakeFeatureRepository featureRepository = new FakeFeatureRepository();
+        private FakeRequirementRepository requirementRepository = new FakeRequirementRepository();
         public FormMain()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace P5
 
         private void FormMain_Load(object sender, System.EventArgs e)
         {
-            this.CenterToScreen();
+            CenterToScreen();
             // Force the user to login successfully or abort the application
             DialogResult isOK = DialogResult.OK;
             while (!_CurrentAppUser.IsAuthenticated && isOK == DialogResult.OK)
@@ -116,6 +118,48 @@ namespace P5
         private void issuesRemoveToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             FormSelectIssue form = new FormSelectIssue(issueRepository, projectSelection, 1);
+            form.ShowDialog();
+            form.Dispose();
+        }
+
+        private void FeatureCreate_Click(object sender, System.EventArgs e)
+        {
+            FormCreateFeature form = new FormCreateFeature(featureRepository, projectSelection, 0, null);
+            form.ShowDialog();
+            form.Dispose();
+        }
+
+        private void FeatureModify_Click(object sender, System.EventArgs e)
+        {
+            FormSelectFeature form = new FormSelectFeature(featureRepository, projectSelection, 0);
+            form.ShowDialog();
+            form.Dispose();
+        }
+
+        private void FeatureRemove_Click(object sender, System.EventArgs e)
+        {
+            FormSelectFeature form = new FormSelectFeature(featureRepository, projectSelection, 1);
+            form.ShowDialog();
+            form.Dispose();
+        }
+
+        private void RequirementCreate_Click(object sender, System.EventArgs e)
+        {
+            FormCreateRequirement form = new FormCreateRequirement(requirementRepository, featureRepository, projectSelection, null, 0);
+            form.ShowDialog();
+            form.Dispose();
+        }
+
+        private void RequirementModify_Click(object sender, System.EventArgs e)
+        {
+            FormSelectRequirement form = new FormSelectRequirement(featureRepository, requirementRepository, projectSelection, 0);
+            form.ShowDialog();
+            form.Dispose();
+        }
+
+        private void RequirementRemove_Click(object sender, System.EventArgs e)
+        {
+            FormSelectRequirement form = new FormSelectRequirement(featureRepository, requirementRepository, projectSelection, 1);
             form.ShowDialog();
             form.Dispose();
         }
